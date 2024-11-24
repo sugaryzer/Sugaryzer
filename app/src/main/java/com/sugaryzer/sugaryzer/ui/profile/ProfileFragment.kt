@@ -7,14 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.sugaryzer.sugaryzer.R
+import com.sugaryzer.sugaryzer.ViewModelFactory
 import com.sugaryzer.sugaryzer.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: ProfileViewModel
+    private val viewModel by viewModels<ProfileViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,12 +32,26 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         val editProfile: LinearLayout = view.findViewById(R.id.editAccount)
         editProfile.setOnClickListener{
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             startActivity(intent)
+        }
+        var materialSwitch = binding.switchMode
+        materialSwitch.isChecked = false
+        materialSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.saveThemeSetting(isChecked)
+        }
+
+        viewModel.getThemeSetting().observe(viewLifecycleOwner){isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                materialSwitch.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                materialSwitch.isChecked = false
+            }
         }
     }
 }
