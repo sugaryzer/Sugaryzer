@@ -1,9 +1,18 @@
-package com.sugaryzer.sugaryzer
+package com.sugaryzer.sugaryzer.ui.main
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.sugaryzer.sugaryzer.R
+import com.sugaryzer.sugaryzer.SectionsPagerAdapter
+import com.sugaryzer.sugaryzer.ViewModelFactory
+import com.sugaryzer.sugaryzer.data.di.Injection
+import com.sugaryzer.sugaryzer.data.pref.dataStore
+import com.sugaryzer.sugaryzer.data.repository.SugaryzerRepository
+import com.sugaryzer.sugaryzer.ui.profile.ProfileViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        applyTheme()
         setContentView(R.layout.activity_main)
 
         viewPager = findViewById(R.id.viewPager)
@@ -24,10 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home -> viewPager.currentItem = 0
-                R.id.navigation_history -> viewPager.currentItem = 1
-                R.id.navigation_news -> viewPager.currentItem = 2
-                R.id.navigation_profile -> viewPager.currentItem = 3
+                R.id.navigation_home -> viewPager.setCurrentItem(0, true)
+                R.id.navigation_history -> viewPager.setCurrentItem(1, true)
+                R.id.navigation_news -> viewPager.setCurrentItem(2, true)
+                R.id.navigation_profile -> viewPager.setCurrentItem(3, true)
             }
             true
         }
@@ -42,5 +52,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun applyTheme() {
+        val repository = Injection.provideRepository(this)
+        val mainViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(repository)
+        ).get(ProfileViewModel::class.java)
+
+        mainViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 }
