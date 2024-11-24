@@ -3,10 +3,8 @@ package com.sugaryzer.sugaryzer
 import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.sugaryzer.sugaryzer.ui.main.MainActivity
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
