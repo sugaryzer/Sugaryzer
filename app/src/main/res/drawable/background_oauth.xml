@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Warna latar belakang -->
+    <solid android:color="#FCF3F3" /> <!-- Ubah warna sesuai kebutuhan -->
+
+    <!-- Radius untuk sisi rounded -->
+    <corners android:radius="12dp" /> <!-- Ubah nilai radius jika perlu -->
+
+    <!-- Margin internal (opsional) -->
+    <padding
+        android:left="8dp"
+        android:top="8dp"
+        android:right="8dp"
+        android:bottom="8dp" />
+</shape>
