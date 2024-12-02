@@ -66,4 +66,8 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in_fill">Please fill the credentials</string>
+    <string name="please_wait">Harap Menunggu</string>
+    <string name="failed_login">Gagal Login\n</string>
+    <string name="logout_confirmation">Apakah anda yakin ingin keluar?</string>
+    <string name="dialog_button_continue">lanjut</string>
 </resources>
