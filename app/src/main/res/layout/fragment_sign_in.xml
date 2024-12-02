@@ -5,7 +5,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ui.login.signup.SignUpFragment">
+tools:context=".ui.auth.signup.SignUpFragment">
 
     <ImageView
         android:id="@+id/topwave"
@@ -58,23 +58,23 @@ tools:context=".ui.login.signup.SignUpFragment">
 
 
     <EditText
-        android:id="@+id/input_username"
+        android:id="@+id/inputEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/background_oauth"
-        android:drawableStart="@drawable/ic_user"
+        android:drawableStart="@drawable/ic_email"
         android:drawablePadding="8dp"
         android:fontFamily="@font/inter_medium"
-        android:hint="Enter Username"
+        android:hint="Email"
         android:textSize="12sp"
         android:inputType="text"
         android:padding="12dp"
         android:textColorHint="#CBD4D8" />
 
     <EditText
-        android:id="@+id/input_password"
+        android:id="@+id/inputPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
@@ -85,7 +85,7 @@ tools:context=".ui.login.signup.SignUpFragment">
         android:drawableStart="@drawable/ic_password"
         android:drawablePadding="8dp"
         android:textSize="12sp"
-        android:hint="Enter Password"
+        android:hint="Password"
         android:inputType="textPassword"
         android:padding="12dp" />
 </LinearLayout>
