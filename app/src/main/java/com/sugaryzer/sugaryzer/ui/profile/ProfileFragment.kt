@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sugaryzer.sugaryzer.R
 import com.sugaryzer.sugaryzer.ViewModelFactory
 import com.sugaryzer.sugaryzer.databinding.FragmentProfileBinding
-import com.sugaryzer.sugaryzer.ui.auth.AuthActivity
+import com.sugaryzer.sugaryzer.ui.signin.SignInActivity
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
@@ -40,7 +40,7 @@ class ProfileFragment : Fragment() {
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             startActivity(intent)
         }
-        var materialSwitch = binding.switchMode
+        val materialSwitch = binding.switchMode
         materialSwitch.isChecked = false
         materialSwitch.setOnCheckedChangeListener { _, isChecked ->
             viewModel.saveThemeSetting(isChecked)
@@ -53,7 +53,7 @@ class ProfileFragment : Fragment() {
                     setMessage(getString(R.string.logout_confirmation))
                     setPositiveButton(getString(R.string.dialog_button_continue)) { _, _ ->
                         viewModel.logout()
-                        val intent = Intent(requireContext(), AuthActivity::class.java)
+                        val intent = Intent(requireContext(), SignInActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
@@ -61,7 +61,6 @@ class ProfileFragment : Fragment() {
                     show()
                 }
             }
-            viewModel.logout()
         }
 
         viewModel.getThemeSetting().observe(viewLifecycleOwner){isDarkModeActive: Boolean ->
