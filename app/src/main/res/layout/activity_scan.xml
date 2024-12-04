@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!-- Camera Preview -->
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="0dp"
@@ -15,8 +14,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Overlay for Scanning Box -->
     <View
         android:id="@+id/overlay"
         android:layout_width="200dp"
@@ -27,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bottom Controls (Capture Button and Flash) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Capture Button -->
         <ImageView
             android:id="@+id/btnCapture"
             android:layout_width="60dp"
@@ -50,14 +45,5 @@
             android:src="@drawable/ic_camera"
             app:tint="#F97B7B"
             android:contentDescription="Capture Button" />
-        <!-- Flash Button -->
-<!--        <ImageView-->
-<!--            android:id="@+id/btnFlash"-->
-<!--            android:layout_width="48dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:src="@drawable/ic_flash"-->
-<!--            android:contentDescription="Flash Button"-->
-<!--            app:tint="#F97B7B" />-->
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
