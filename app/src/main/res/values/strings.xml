@@ -66,4 +66,17 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in_fill">Please fill the credentials</string>
+    <string name="please_wait">Harap Menunggu</string>
+    <string name="failed_login">Gagal Login\n</string>
+    <string name="logout_confirmation">Apakah anda yakin ingin keluar?</string>
+    <string name="dialog_button_continue">lanjut</string>
+    <string name="email">Email\n</string>
+    <string name="input_password">Masukkan Password\n</string>
+    <string name="dont_have_account">Dont have an account?</string>
+    <string name="error_invalid_email">Format Email Salah\n</string>
+    <string name="error_password_length">Password Minimal 8 Karakter</string>
+    <string name="error_email_empty">Email Kosong</string>
+    <string name="error_password_empty">Password kosong</string>
+    <string name="profile_name">Mutiara Nur Zarima\n</string>
+    <string name="halo">Halo</string>
 </resources>

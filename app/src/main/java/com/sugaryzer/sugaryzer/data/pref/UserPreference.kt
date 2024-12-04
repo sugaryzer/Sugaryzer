@@ -20,7 +20,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
-    fun getSession(): Flow<String?> {
+    fun getSession(): Flow<String?>{
         return dataStore.data.map { preferences ->
             preferences[TOKEN_KEY]
         }
@@ -28,9 +28,8 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
 
     suspend fun removeSession() {
         dataStore.edit { preferences ->
-            preferences.remove(TOKEN_KEY)
+            preferences.clear()
         }
-        println("Token removed!")
     }
 
     fun getThemeSetting(): Flow<Boolean> {

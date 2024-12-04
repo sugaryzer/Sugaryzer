@@ -1,5 +1,6 @@
 package com.sugaryzer.sugaryzer.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sugaryzer.sugaryzer.databinding.FragmentHomeBinding
+import com.sugaryzer.sugaryzer.ui.scan.ScanActivity
 
 class HomeFragment : Fragment() {
 
@@ -31,6 +33,11 @@ class HomeFragment : Fragment() {
         val textView: TextView = binding.textHome
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
+        }
+
+        binding.addRecord.setOnClickListener {
+            val addStoryActivity = Intent(requireContext(), ScanActivity::class.java)
+            startActivity(addStoryActivity)
         }
         return root
     }

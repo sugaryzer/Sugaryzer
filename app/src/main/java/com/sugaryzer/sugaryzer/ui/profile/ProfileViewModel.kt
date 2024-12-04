@@ -17,4 +17,10 @@ class ProfileViewModel(private val repository: SugaryzerRepository) : ViewModel(
             repository.saveThemeSetting(isDarkModeActive)
         }
     }
+
+    fun logout() {
+        viewModelScope.launch {
+            repository.removeSession()
+        }
+    }
 }

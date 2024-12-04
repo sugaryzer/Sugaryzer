@@ -7,13 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.sugaryzer.sugaryzer.R
 import com.sugaryzer.sugaryzer.ViewModelFactory
 import com.sugaryzer.sugaryzer.databinding.FragmentProfileBinding
+import com.sugaryzer.sugaryzer.ui.signin.SignInActivity
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -38,10 +40,27 @@ class ProfileFragment : Fragment() {
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             startActivity(intent)
         }
-        var materialSwitch = binding.switchMode
+        val materialSwitch = binding.switchMode
         materialSwitch.isChecked = false
         materialSwitch.setOnCheckedChangeListener { _, isChecked ->
             viewModel.saveThemeSetting(isChecked)
+        }
+
+        binding.logoutButton.setOnClickListener{
+            lifecycleScope.launch {
+                AlertDialog.Builder(requireContext()).apply {
+                    setTitle(getString(R.string.logout_confirmation))
+                    setMessage(getString(R.string.logout_confirmation))
+                    setPositiveButton(getString(R.string.dialog_button_continue)) { _, _ ->
+                        viewModel.logout()
+                        val intent = Intent(requireContext(), SignInActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                    create()
+                    show()
+                }
+            }
         }
 
         viewModel.getThemeSetting().observe(viewLifecycleOwner){isDarkModeActive: Boolean ->
