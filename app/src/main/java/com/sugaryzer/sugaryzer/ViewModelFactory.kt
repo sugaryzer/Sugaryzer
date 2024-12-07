@@ -9,6 +9,7 @@ import com.sugaryzer.sugaryzer.ui.main.MainViewModel
 import com.sugaryzer.sugaryzer.ui.signin.SignInViewModel
 import com.sugaryzer.sugaryzer.ui.signup.SignUpViewModel
 import com.sugaryzer.sugaryzer.ui.profile.ProfileViewModel
+import com.sugaryzer.sugaryzer.ui.scan.ScanViewModel
 
 class ViewModelFactory(
     private val repository: SugaryzerRepository
@@ -27,6 +28,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
+                ScanViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

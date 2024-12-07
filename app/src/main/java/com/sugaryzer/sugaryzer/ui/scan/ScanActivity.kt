@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
@@ -20,14 +21,18 @@ import androidx.core.content.ContextCompat
 import androidx.camera.core.ImageCaptureException
 import androidx.navigation.ui.AppBarConfiguration
 import com.sugaryzer.sugaryzer.ViewModelFactory
+import com.sugaryzer.sugaryzer.data.helper.createCustomTempFile
+import com.sugaryzer.sugaryzer.data.helper.getRotatedBitmap
+import com.sugaryzer.sugaryzer.data.helper.reduceFileImage
 import com.sugaryzer.sugaryzer.databinding.ActivityScanBinding
 import java.io.File
+import java.io.FileOutputStream
 
 class ScanActivity : AppCompatActivity() {
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
-    private val viewModel by viewModels<ScanVIewModel> {
+    private val viewModel by viewModels<ScanViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
@@ -82,10 +87,7 @@ class ScanActivity : AppCompatActivity() {
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
 
-        val photoFile = File(
-            externalMediaDirs.firstOrNull(),
-            "${System.currentTimeMillis()}.jpg"
-        )
+        val photoFile = createCustomTempFile(application)
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
@@ -95,19 +97,26 @@ class ScanActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
-                    Log.d("CameraX", "Photo saved: $savedUri")
-                    Toast.makeText(applicationContext, "Photo saved: $savedUri", Toast.LENGTH_SHORT)
-                        .show()
+                    viewModel.setImageUri(savedUri)
 
-                    fun cropImage(bitmap: Bitmap, overlayRect: Rect): Bitmap {
-                        return Bitmap.createBitmap(
-                            bitmap,
-                            overlayRect.left,
-                            overlayRect.top,
-                            overlayRect.width(),
-                            overlayRect.height()
-                        )
+                    val bitmap = BitmapFactory.decodeFile(photoFile.absolutePath)
+
+                    val rotatedBitmap = bitmap.getRotatedBitmap(photoFile)
+
+                    val overlayRect = getOverlayBounds()
+                    val croppedBitmap = cropImage(rotatedBitmap, overlayRect)
+
+                    val croppedFile = File(externalCacheDir, "cropped_${System.currentTimeMillis()}.jpg")
+                    FileOutputStream(croppedFile).use {
+                        croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
                     }
+
+                    val compressedFile = croppedFile.reduceFileImage()
+                    val croppedUri = Uri.fromFile(compressedFile)
+
+                    val intent = Intent(this@ScanActivity, ConfirmActivity::class.java)
+                    intent.putExtra("IMAGE_URI", croppedUri.toString())
+                    startActivity(intent)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -116,6 +125,34 @@ class ScanActivity : AppCompatActivity() {
             }
         )
     }
+
+    private fun getOverlayBounds(): Rect {
+        val overlay = binding.overlay
+        val location = IntArray(2)
+        overlay.getLocationOnScreen(location)
+        val left = location[0]
+        val top = location[1]
+        val right = left + overlay.width
+        val bottom = top + overlay.height
+        return Rect(left, top, right, bottom)
+    }
+
+    private fun cropImage(bitmap: Bitmap, overlayRect: Rect): Bitmap {
+        val scaleX = bitmap.width.toFloat() / binding.previewView.width.toFloat()
+        val scaleY = bitmap.height.toFloat() / binding.previewView.height.toFloat()
+
+        val left = (overlayRect.left * scaleX).toInt().coerceAtLeast(0)
+        val top = (overlayRect.top * scaleY).toInt().coerceAtLeast(0)
+        val right = (overlayRect.right * scaleX).toInt().coerceAtMost(bitmap.width)
+        val bottom = (overlayRect.bottom * scaleY).toInt().coerceAtMost(bitmap.height)
+
+        val width = (right - left).coerceAtLeast(1)
+        val height = (bottom - top).coerceAtLeast(1)
+
+        return Bitmap.createBitmap(bitmap, left, top, width, height)
+    }
+
+
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -132,4 +169,5 @@ class ScanActivity : AppCompatActivity() {
             this,
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
+
 }
