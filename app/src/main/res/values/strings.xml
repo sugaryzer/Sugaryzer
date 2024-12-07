@@ -79,4 +79,6 @@
     <string name="error_password_empty">Password kosong</string>
     <string name="profile_name">Mutiara Nur Zarima\n</string>
     <string name="halo">Halo</string>
+    <string name="product_name">Teh Pucuk Harum</string>
+    <string name="text_sugar">Sugar: </string>
 </resources>
