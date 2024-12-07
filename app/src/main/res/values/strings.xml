@@ -77,8 +77,13 @@
     <string name="error_password_length">Password Minimal 8 Karakter</string>
     <string name="error_email_empty">Email Kosong</string>
     <string name="error_password_empty">Password kosong</string>
-    <string name="profile_name">Mutiara Nur Zarima\n</string>
-    <string name="halo">Halo</string>
+    <string name="profile_name">Mutiara Nur Zarima</string>
+    <string name="halo">Hello</string>
     <string name="product_name">Teh Pucuk Harum</string>
-    <string name="text_sugar">Sugar: </string>
+    <string name="text_sugar">Consumption of sugar: </string>
+    <string name="media_cover">Media</string>
+    <string name="sugar_consume">39 gr</string>
+    <string name="date">15 Desember 2020</string>
+    <string name="news_name">Gula itu bahaya!</string>
+    <string name="news_description">Gula itu bahaya loh kalo berlebihan!</string>
 </resources>
