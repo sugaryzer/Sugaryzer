@@ -12,8 +12,6 @@ import com.sugaryzer.sugaryzer.R
 import com.sugaryzer.sugaryzer.SectionsPagerAdapter
 import com.sugaryzer.sugaryzer.ViewModelFactory
 import com.sugaryzer.sugaryzer.data.di.Injection
-import com.sugaryzer.sugaryzer.data.pref.dataStore
-import com.sugaryzer.sugaryzer.data.repository.SugaryzerRepository
 import com.sugaryzer.sugaryzer.ui.profile.ProfileViewModel
 import com.sugaryzer.sugaryzer.ui.signin.SignInActivity
 
