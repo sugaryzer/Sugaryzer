@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
@@ -21,19 +20,19 @@
 
         <TextView
             android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorPrimary"
-            android:text="@string/product_name"
-            android:textSize="16sp"
-            android:textStyle="bold"
             android:lines="2"
-            android:gravity="center"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/product_name"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:layout_toStartOf="@id/tvTime"
+            card_view:layout_constraintEnd_toStartOf="@id/tvTime"
             card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintStart_toStartOf="parent"/>
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
