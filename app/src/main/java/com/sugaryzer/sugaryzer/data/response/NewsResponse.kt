@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class NewsResponse(
 
 	@field:SerializedName("result")
-	val result: List<NewsItem?>? = null,
+	val result: ResultNews? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
@@ -14,7 +14,28 @@ data class NewsResponse(
 	val message: String? = null
 )
 
-data class NewsItem(
+data class ResultNews(
+
+	@field:SerializedName("data")
+	val data: List<DataItemNews>? = null,
+
+	@field:SerializedName("paging")
+	val paging: PagingNews? = null
+)
+
+data class PagingNews(
+
+	@field:SerializedName("size")
+	val size: Int? = null,
+
+	@field:SerializedName("total_page")
+	val totalPage: Int? = null,
+
+	@field:SerializedName("current_page")
+	val currentPage: Int? = null
+)
+
+data class DataItemNews(
 
 	@field:SerializedName("image")
 	val image: String? = null,

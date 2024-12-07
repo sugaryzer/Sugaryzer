@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sugaryzer.sugaryzer.data.di.Injection
 import com.sugaryzer.sugaryzer.data.repository.SugaryzerRepository
+import com.sugaryzer.sugaryzer.ui.history.HistoryViewModel
 import com.sugaryzer.sugaryzer.ui.main.MainViewModel
+import com.sugaryzer.sugaryzer.ui.news.NewsViewModel
 import com.sugaryzer.sugaryzer.ui.signin.SignInViewModel
 import com.sugaryzer.sugaryzer.ui.signup.SignUpViewModel
 import com.sugaryzer.sugaryzer.ui.profile.ProfileViewModel
+import com.sugaryzer.sugaryzer.ui.scan.ScanViewModel
 
 class ViewModelFactory(
     private val repository: SugaryzerRepository
@@ -27,6 +30,15 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
+                ScanViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(NewsViewModel::class.java) -> {
+                NewsViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

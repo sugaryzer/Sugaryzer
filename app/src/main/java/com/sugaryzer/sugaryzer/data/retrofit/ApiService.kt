@@ -1,6 +1,7 @@
 package com.sugaryzer.sugaryzer.data.retrofit
 
-import com.sugaryzer.sugaryzer.data.SignInRequest
+import com.sugaryzer.sugaryzer.data.dataclass.SignInRequest
+import com.sugaryzer.sugaryzer.data.response.HistoryResponse
 import com.sugaryzer.sugaryzer.data.response.LoginResponse
 import com.sugaryzer.sugaryzer.data.response.MessageResponse
 import com.sugaryzer.sugaryzer.data.response.NewsResponse
@@ -30,5 +31,11 @@ interface ApiService {
     ): LoginResponse
 
     @GET("articles")
-    suspend fun news(): NewsResponse
+    suspend fun getNews(): NewsResponse
+
+    @GET("users/current/scanned-products")
+    suspend fun getHistory(): HistoryResponse
+
+    @GET("users/current/scanned-products")
+    suspend fun historyScan(): HistoryResponse
 }

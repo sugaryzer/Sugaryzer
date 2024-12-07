@@ -6,26 +6,62 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sugaryzer.sugaryzer.R
+import com.sugaryzer.sugaryzer.ViewModelFactory
+import com.sugaryzer.sugaryzer.data.ResultState
+import com.sugaryzer.sugaryzer.databinding.FragmentHistoryBinding
+import com.sugaryzer.sugaryzer.ui.adapter.HistoryListAdapter
 
 class HistoryFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HistoryFragment()
+    private val viewModel by viewModels<HistoryViewModel> {
+        ViewModelFactory.getInstance(requireContext())
     }
-
-    private val viewModel: HistoryViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
-
+    private val binding get() = checkNotNull(_binding) { "Binding should not be accessed before onCreateView or after onDestroyView." }
+    private var _binding: FragmentHistoryBinding? = null
+    private lateinit var historyAdapter: HistoryListAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_history, container, false)
+        _binding =  FragmentHistoryBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        historyAdapter = HistoryListAdapter(requireContext())
+        binding.rvHistory.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = historyAdapter
+        }
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setView(R.layout.loading)
+        val dialog: AlertDialog = builder.create()
+        viewModel.getScanHistory.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is ResultState.Loading -> dialog.show()
+                is ResultState.Error -> {
+                    dialog.dismiss()
+                    AlertDialog.Builder(requireContext()).apply {
+                        setTitle("Gagal memuat riwayat")
+                        setMessage(response.message)
+                        create()
+                        show()
+                    }
+                }
+
+                is ResultState.Success -> {
+                    dialog.dismiss()
+                    historyAdapter.submitList(response.data)
+                }
+
+                else -> dialog.dismiss()
+            }
+        }
     }
 }

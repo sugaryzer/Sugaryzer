@@ -26,7 +26,7 @@ object ApiConfig {
             .addInterceptor(authInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://test-sugaryzer-be.vercel.app/api/")
+            .baseUrl("https://deploy-sugaryzer.vercel.app/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

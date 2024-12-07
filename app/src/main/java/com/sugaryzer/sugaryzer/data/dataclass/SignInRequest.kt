@@ -1,4 +1,4 @@
-package com.sugaryzer.sugaryzer.data
+package com.sugaryzer.sugaryzer.data.dataclass
 
 data class SignInRequest(
     val email: String,

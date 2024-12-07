@@ -8,7 +8,7 @@ import com.sugaryzer.sugaryzer.data.ResultState
 import com.sugaryzer.sugaryzer.data.repository.SugaryzerRepository
 import com.sugaryzer.sugaryzer.data.response.MessageResponse
 
-class ScanVIewModel(private val sugaryzerRepository: SugaryzerRepository): ViewModel() {
+class ScanViewModel(private val sugaryzerRepository: SugaryzerRepository): ViewModel() {
     private val _imageUri = MutableLiveData<Uri?>()
     val imageUri: LiveData<Uri?> = _imageUri
 
