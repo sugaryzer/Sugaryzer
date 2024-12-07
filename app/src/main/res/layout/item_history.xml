@@ -15,18 +15,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tvProductName"
             android:layout_width="wrap_content"
-            android:paddingHorizontal="10dp"
+            android:layout_marginStart="10dp"
             android:layout_height="wrap_content"
             android:textColor="?attr/colorPrimary"
             android:text="@string/product_name"
             android:textSize="16sp"
             android:textStyle="bold"
             android:lines="2"
+            android:gravity="center"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
@@ -40,7 +43,6 @@
             android:layout_marginEnd="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:paddingHorizontal="10dp"
             android:text="14:30"
             android:textSize="14sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
@@ -52,15 +54,13 @@
 
         <TextView
             android:id="@+id/tvSugar"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:paddingHorizontal="10dp"
+            android:layout_marginStart="10dp"
             android:text="@string/text_sugar"
             android:textSize="14sp"
-            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/tvProductName" />
@@ -69,16 +69,13 @@
             android:id="@+id/tvDetailSugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:paddingHorizontal="10dp"
-            android:text="39 gr"
+            android:text="@string/sugar_consume"
             android:textSize="14sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="@+id/tvSugar"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvProductName"
-            card_view:layout_constraintVertical_bias="0.0" />
+            card_view:layout_constraintStart_toEndOf="@+id/tvSugar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
