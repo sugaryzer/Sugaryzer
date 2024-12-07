@@ -14,6 +14,9 @@ import com.sugaryzer.sugaryzer.data.response.Product
 import com.sugaryzer.sugaryzer.databinding.FragmentHomeBinding
 import com.sugaryzer.sugaryzer.ui.adapter.HomeAdapter
 import com.sugaryzer.sugaryzer.ui.scan.ScanActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -47,10 +50,12 @@ class HomeFragment : Fragment() {
         homeAdapter = HomeAdapter(productList)
         recyclerView.adapter = homeAdapter
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val currentDate = Date()
+        val formatter = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault())
+        val formattedDate = formatter.format(currentDate)
+
+
+        binding.tvDate.text = formattedDate
 
         binding.addRecord.setOnClickListener {
             val addStoryActivity = Intent(requireContext(), ScanActivity::class.java)

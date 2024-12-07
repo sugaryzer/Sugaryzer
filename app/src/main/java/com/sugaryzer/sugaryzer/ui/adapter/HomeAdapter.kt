@@ -17,7 +17,7 @@ class HomeAdapter(private val productList: List<Product>) : RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_home, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_history, parent, false)
         return ProductViewHolder(view)
     }
 
