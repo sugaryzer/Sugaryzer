@@ -7,3 +7,4 @@ data class Product(
     val time: String,
     val detailSugar: String
 )
+
