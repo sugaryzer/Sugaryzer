@@ -10,17 +10,15 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.sugaryzer.sugaryzer.R
 import com.sugaryzer.sugaryzer.ViewModelFactory
 import com.sugaryzer.sugaryzer.data.ResultState
 import com.sugaryzer.sugaryzer.databinding.ActivitySignInBinding
 import com.sugaryzer.sugaryzer.ui.main.MainActivity
+import com.sugaryzer.sugaryzer.ui.signup.SignUpActivity
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
@@ -37,7 +35,7 @@ class SignInActivity : AppCompatActivity() {
         setupAction()
         playAnimation()
         binding.signUp.setOnClickListener{
-            val signUpActivity = Intent()
+            val signUpActivity = Intent(this, SignUpActivity::class.java)
             startActivity(signUpActivity)
             finish()
         }
@@ -103,6 +101,8 @@ class SignInActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
     private fun showMessageDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
