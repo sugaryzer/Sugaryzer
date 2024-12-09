@@ -1,21 +1,29 @@
 package com.sugaryzer.sugaryzer.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.sugaryzer.sugaryzer.R
+import com.sugaryzer.sugaryzer.databinding.ActivitySignUpBinding
+import com.sugaryzer.sugaryzer.ui.signin.SignInActivity
 
 class SignUpActivity : AppCompatActivity() {
+
+    private var _binding : ActivitySignUpBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_sign_up)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnSignUp.setOnClickListener{
+            val signUpActivity = Intent(this, SignInActivity::class.java)
+            startActivity(signUpActivity)
+            finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
