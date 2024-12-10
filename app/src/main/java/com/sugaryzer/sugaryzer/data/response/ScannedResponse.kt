@@ -2,19 +2,19 @@ package com.sugaryzer.sugaryzer.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class HistoryResponse(
+data class ScannedResponse(
 
 	@field:SerializedName("result")
-	val result: ResultHistory? = null,
+	val result: ResultScanned,
 
 	@field:SerializedName("error")
-	val error: Boolean? = null,
+	val error: Boolean,
 
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String
 )
 
-data class ProductHistory(
+data class ProductScanned(
 
 	@field:SerializedName("image")
 	val image: String? = null,
@@ -35,44 +35,23 @@ data class ProductHistory(
 	val category: String? = null
 )
 
-data class DataItemHistory(
+data class ResultScanned(
 
 	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
+	val createdAt: String,
 
 	@field:SerializedName("product")
-	val product: ProductHistory? = null,
+	val product: ProductScanned,
 
 	@field:SerializedName("productId")
-	val productId: Int? = null,
+	val productId: Int,
 
 	@field:SerializedName("sugarConsume")
-	val sugarConsume: Int? = null,
+	val sugarConsume: Int,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("userId")
-	val userId: String? = null
-)
-
-data class ResultHistory(
-
-	@field:SerializedName("data")
-	val data: List<DataItemHistory>? = null,
-
-	@field:SerializedName("paging")
-	val paging: PagingHistory? = null
-)
-
-data class PagingHistory(
-
-	@field:SerializedName("size")
-	val size: Int? = null,
-
-	@field:SerializedName("total_page")
-	val totalPage: Int? = null,
-
-	@field:SerializedName("current_page")
-	val currentPage: Int? = null
+	val userId: String
 )
