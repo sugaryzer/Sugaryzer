@@ -1,5 +1,6 @@
 package com.sugaryzer.sugaryzer.data.retrofit
 
+import com.sugaryzer.sugaryzer.BuildConfig
 import com.sugaryzer.sugaryzer.data.pref.UserPreference
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -12,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
     fun getApiService(preferences: UserPreference): ApiService {
-        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val loggingInterceptor = if(BuildConfig.DEBUG) { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }else { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE) }
         val authInterceptor = Interceptor { chain ->
             val req = chain.request()
             val token = runBlocking { preferences.getSession().first() }
@@ -26,7 +27,7 @@ object ApiConfig {
             .addInterceptor(authInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://deploy-sugaryzer.vercel.app/api/")
+            .baseUrl("https://backend-services-1073857396394.asia-southeast2.run.app/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
