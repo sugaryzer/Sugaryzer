@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sugaryzer.sugaryzer.data.response.DataItemHistory
 import com.sugaryzer.sugaryzer.databinding.ItemHistoryBinding
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 class HistoryListAdapter(private val context: Context) :
     ListAdapter<DataItemHistory, HistoryListAdapter.MyViewHolder>(DIFF_CALLBACK) {
@@ -28,15 +29,22 @@ class HistoryListAdapter(private val context: Context) :
 
         fun bind(history: DataItemHistory) {
             binding.tvProductName.text = history.product?.name ?: "Unknown Product"
-            binding.tvDetailSugar.text = "${history.product?.amountOfSugar ?: 0} Gram"
+            binding.tvDetailSugar.text = "${history.sugarConsume ?: 0} Gram"
             binding.tvTime.text = formatTime(history.createdAt ?: "")
         }
 
         private fun formatTime(inputDate: String): String {
             return try {
                 val inputFormat = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+                val utcDateTime = LocalDateTime.parse(inputDate, inputFormat)
+
+                val utcZonedDateTime = utcDateTime.atZone(ZoneId.of("UTC"))
+
+                val wibZonedDateTime = utcZonedDateTime.withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
+
                 val outputFormat = DateTimeFormatter.ofPattern("HH:mm")
-                LocalDateTime.parse(inputDate, inputFormat).format(outputFormat)
+                wibZonedDateTime.format(outputFormat)
+
             } catch (e: Exception) {
                 ""
             }
