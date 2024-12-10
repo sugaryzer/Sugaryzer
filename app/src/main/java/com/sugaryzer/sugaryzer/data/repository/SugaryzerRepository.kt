@@ -3,12 +3,19 @@ package com.sugaryzer.sugaryzer.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.sugaryzer.sugaryzer.data.ResultState
+import com.sugaryzer.sugaryzer.data.dataclass.ScannedData
 import com.sugaryzer.sugaryzer.data.dataclass.SignInRequest
 import com.sugaryzer.sugaryzer.data.pref.UserPreference
 import com.sugaryzer.sugaryzer.data.response.DataItemHistory
 import com.sugaryzer.sugaryzer.data.response.DataItemNews
 import com.sugaryzer.sugaryzer.data.response.LoginResponse
+import com.sugaryzer.sugaryzer.data.response.ResultProfile
+import com.sugaryzer.sugaryzer.data.response.ScanResponse
+import com.sugaryzer.sugaryzer.data.response.ScannedResponse
 import com.sugaryzer.sugaryzer.data.retrofit.ApiService
+import okhttp3.MultipartBody
+import retrofit2.HttpException
+import java.io.IOException
 
 class SugaryzerRepository private constructor(
     private val apiService: ApiService,
@@ -24,6 +31,17 @@ class SugaryzerRepository private constructor(
     suspend fun login(email: String, password: String): LoginResponse {
         val signInRequest = SignInRequest(email, password)
         return apiService.login(signInRequest)
+    }
+
+    suspend fun updateProfile(name: String, weight: Int, age: Int, height: Int): ResultProfile {
+        val resultProfile = ResultProfile(name, weight, age, height)
+        val response = apiService.updateProfile(resultProfile)
+
+        if (response.error == false) {
+            return response.result ?: throw IllegalStateException("Profile update successful but result is null")
+        } else {
+            throw IllegalStateException(response.message ?: "Unknown error from server")
+        }
     }
 
     suspend fun register(name: String, email: String, image: String, height: Int, weight: Int, age: Int, password: String) = apiService.register(name, email, image, height, weight, age, password)
@@ -46,6 +64,24 @@ class SugaryzerRepository private constructor(
         }
     }
 
+    fun getProfile(): LiveData<ResultState<List<ResultProfile>>> = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val response = apiService.getProfile()
+
+            if (response.error == false) {
+                val resultList = response.result?.let { listOf(it) } ?: emptyList()
+                emit(ResultState.Success(resultList))
+            } else {
+                emit(ResultState.Error(response.message ?: "Unknown error from server"))
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error(e.message.toString()))
+        }
+    }
+
+
     fun getScanHistory(): LiveData<ResultState<List<DataItemHistory>>> = liveData {
         emit(ResultState.Loading)
 
@@ -60,6 +96,29 @@ class SugaryzerRepository private constructor(
         } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
+    }
+
+    suspend fun scanImage(photo: MultipartBody.Part): ResultState<ScanResponse> {
+        return try {
+            val response = apiService.scanImage(photo)
+
+            if (response.error) {
+                ResultState.Error(response.message)
+            } else {
+                ResultState.Success(response)
+            }
+        } catch (e: IOException) {
+            ResultState.Error("Network error: ${e.message}")
+        } catch (e: HttpException) {
+            ResultState.Error("HTTP error: ${e.message}")
+        } catch (e: Exception) {
+            ResultState.Error("An unexpected error occurred: ${e.message}")
+        }
+    }
+
+    suspend fun uploadScan(code: String, sugarConsume: Double): ScannedResponse {
+        val scannedData = ScannedData(code, sugarConsume)
+        return apiService.uploadScan(scannedData)
     }
 
     companion object {

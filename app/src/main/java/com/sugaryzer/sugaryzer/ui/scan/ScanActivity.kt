@@ -25,6 +25,7 @@ import com.sugaryzer.sugaryzer.data.helper.createCustomTempFile
 import com.sugaryzer.sugaryzer.data.helper.getRotatedBitmap
 import com.sugaryzer.sugaryzer.data.helper.reduceFileImage
 import com.sugaryzer.sugaryzer.databinding.ActivityScanBinding
+import com.sugaryzer.sugaryzer.ui.main.MainActivity
 import java.io.File
 import java.io.FileOutputStream
 
@@ -131,9 +132,9 @@ class ScanActivity : AppCompatActivity() {
         val location = IntArray(2)
         overlay.getLocationOnScreen(location)
         val left = location[0]
-        val top = location[1]
-        val right = left + overlay.width
-        val bottom = top + overlay.height
+        val top = location[1] - 60
+        val right = left + (overlay.width - 30)
+        val bottom = top + (overlay.height - 30)
         return Rect(left, top, right, bottom)
     }
 
@@ -170,4 +171,11 @@ class ScanActivity : AppCompatActivity() {
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
 }
