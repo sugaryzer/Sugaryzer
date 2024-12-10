@@ -13,7 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.sugaryzer.sugaryzer.R
 import com.sugaryzer.sugaryzer.ViewModelFactory
+import com.sugaryzer.sugaryzer.data.ResultState
 import com.sugaryzer.sugaryzer.databinding.FragmentProfileBinding
+import com.sugaryzer.sugaryzer.ui.scan.ProductInformationActivity
 import com.sugaryzer.sugaryzer.ui.signin.SignInActivity
 import kotlinx.coroutines.launch
 
@@ -36,10 +38,6 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val editProfile: LinearLayout = view.findViewById(R.id.editAccount)
-        editProfile.setOnClickListener{
-            val intent = Intent(requireContext(), EditProfileActivity::class.java)
-            startActivity(intent)
-        }
         val materialSwitch = binding.switchMode
         materialSwitch.isChecked = false
         materialSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -61,6 +59,42 @@ class ProfileFragment : Fragment() {
                     show()
                 }
             }
+        }
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setView(R.layout.loading)
+        val dialog: AlertDialog = builder.create()
+        viewModel.getProfile.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is ResultState.Loading -> dialog.show()
+                is ResultState.Error -> {
+                    dialog.dismiss()
+                    AlertDialog.Builder(requireContext()).apply {
+                        setTitle("Gagal memuat profile")
+                        setMessage(response.message)
+                        create()
+                        show()
+                    }
+                }
+
+                is ResultState.Success -> {
+                    dialog.dismiss()
+                    binding.profileName.text = response.data[0].name
+                    editProfile.setOnClickListener{
+                        val intent = Intent(requireContext(), EditProfileActivity::class.java).apply {
+                            putExtra(EditProfileActivity.EXTRA_PROFILE_NAME, response.data[0].name)
+                            putExtra(EditProfileActivity.EXTRA_PROFILE_AGE, response.data[0].age)
+                            putExtra(EditProfileActivity.EXTRA_PROFILE_HEIGHT, response.data[0].height)
+                            putExtra(EditProfileActivity.EXTRA_PROFILE_WEIGHT, response.data[0].weight)
+                            putExtra(EditProfileActivity.EXTRA_PROFILE_WEIGHT, response.data[0].weight)
+                        }
+                        startActivity(intent)
+                    }
+                }
+
+                else -> dialog.dismiss()
+            }
+            dialog.dismiss()
         }
 
         viewModel.getThemeSetting().observe(viewLifecycleOwner){isDarkModeActive: Boolean ->
