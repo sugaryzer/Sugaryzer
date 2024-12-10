@@ -86,4 +86,9 @@
     <string name="date">15 Desember 2020</string>
     <string name="news_name">Gula itu bahaya!</string>
     <string name="news_description">Gula itu bahaya loh kalo berlebihan!</string>
+    <string name="add_consumption">Tambahkan ke konsumsi</string>
+    <string name="back_to_camera">Kembali ke kamera</string>
+    <string name="failed_update_data">Gagal memperbarui data</string>
+    <string name="success_update_profile">Berhasil Memperbarui Data</string>
+    <string name="success_save_history">Berhasil menyimpan data</string>
 </resources>
