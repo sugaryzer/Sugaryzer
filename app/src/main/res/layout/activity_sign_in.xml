@@ -23,7 +23,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="@string/sign_in"
-        android:textColor="@color/black"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:fontFamily="@font/inter_bold"
         app:layout_constraintTop_toBottomOf="@+id/topwave"
@@ -38,6 +38,7 @@
         android:layout_marginHorizontal="32dp"
         app:startIconDrawable="@drawable/ic_email"
         app:layout_constraintTop_toBottomOf="@+id/signIn"
+        android:background="@drawable/background_oauth"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -57,6 +58,7 @@
         android:layout_marginTop="16dp"
         app:endIconMode="password_toggle"
         app:startIconDrawable="@drawable/ic_password"
+        android:background="@drawable/background_oauth"
         app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -74,7 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="24dp"
-        android:backgroundTint="@color/button_blue"
+        android:background="@drawable/btn_corner_radius"
+        android:backgroundTint="#05C3DD"
         android:text="@string/sign_in"
         android:textColor="@android:color/white"
         android:textSize="12sp"
@@ -101,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
-        android:textColor="@color/black"
+        android:textColor="#000000"
         android:fontFamily="@font/poppins_semibold"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@+id/tv_dont_have_account"

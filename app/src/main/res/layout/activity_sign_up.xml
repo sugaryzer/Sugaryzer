@@ -17,8 +17,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,9 +33,9 @@
 
             <TextView
                 android:id="@+id/sign_in"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="312dp"
+                android:layout_marginStart="285dp"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/sign_in"
                 android:textColor="@color/white"
@@ -146,25 +148,29 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="text"
-                    android:hint="@string/your_name"/>
+                    android:hint="@string/your_name"
+                    android:textColorHint="#CBD4D8"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btn_sign_up"
-                android:layout_width="321dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/btn_salmon_pink"
-                android:backgroundTint="@color/button_blue"
-                android:padding="5dp"
-                android:text="@string/sign_up"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        android:layout_width="321dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_corner_radius"
+        android:backgroundTint="@color/button_blue"
+        android:padding="5dp"
+        android:text="@string/sign_up"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/bottomwave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottomwave"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/bottomwave"
@@ -172,7 +178,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/bottom_wave_login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

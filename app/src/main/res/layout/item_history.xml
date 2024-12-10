@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:lines="2"
             tools:text="@string/product_name"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="#1A1A1A"
             android:textSize="16sp"
             android:layout_marginStart="10dp"
             android:textStyle="bold"
@@ -44,6 +44,7 @@
             android:maxLines="2"
             android:text="14:30"
             android:textSize="14sp"
+            android:textColor="#6A6A6A"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="1.0"
@@ -60,6 +61,7 @@
             android:layout_marginStart="10dp"
             android:text="@string/text_sugar"
             android:textSize="14sp"
+            android:textColor="#6A6A6A"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/tvProductName" />
@@ -73,6 +75,7 @@
             android:paddingHorizontal="10dp"
             android:text="@string/sugar_consume"
             android:textSize="14sp"
+            android:textColor="#6A6A6A"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/tvSugar" />
 
