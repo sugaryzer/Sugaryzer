@@ -51,11 +51,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="18dp"
                 android:gravity="center_vertical"
                 android:text="@string/profile_name"
                 android:textColor="#000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_semibold"/>
         </LinearLayout>
 
         <!-- Menu Section -->
@@ -93,7 +94,8 @@
                     android:text="@string/edit_account"
                     android:layout_marginStart="16dp"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"/>
             </LinearLayout>
 
             <!-- History Scan -->
@@ -145,7 +147,8 @@
                     android:text="@string/night_mode"
                     android:layout_marginStart="16dp"
                     android:textColor="#000"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"
                     android:layout_weight="1" />
 
                 <com.google.android.material.materialswitch.MaterialSwitch
