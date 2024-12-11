@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/halo"
                 android:textColor="#6A6A6A"
                 android:textSize="12sp"
@@ -35,28 +35,28 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_name"
-                android:layout_marginTop="1dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/profile_name"
                 android:textColor="#1A1A1A"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/poppins_semibold"
-                app:layout_constraintTop_toBottomOf="@id/halo"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/halo" />
 
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saturday, 30 January 2024"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Saturday, 30 January 2024"
                 android:textColor="#6A6A6A"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/poppins_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,12 +65,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="Analysis summary"
                 android:textAlignment="center"
                 android:textColor="#1A1A1A"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/poppins_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/halo" />
 
@@ -101,7 +101,7 @@
                             android:id="@+id/tvYourMax"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="Your max"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
@@ -117,7 +117,7 @@
                             android:id="@+id/tvSugarIntake"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="sugar intake"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
@@ -143,31 +143,30 @@
                             android:id="@+id/tvPersentage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="100%"
                             android:textColor="#6E8658"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@id/imgEclipse"
                             app:layout_constraintEnd_toEndOf="@id/imgEclipse"
-                            app:layout_constraintHorizontal_bias="0.488"
+                            app:layout_constraintHorizontal_bias="0.618"
                             app:layout_constraintStart_toStartOf="@id/imgEclipse"
                             app:layout_constraintTop_toTopOf="@id/imgEclipse"
-                            app:layout_constraintVertical_bias="0.483" />
+                            app:layout_constraintVertical_bias="0.433" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="maximum"
                             android:textColor="#6E8658"
                             android:textSize="10sp"
                             android:textStyle="bold"
+                            app:layout_constraintTop_toBottomOf="@id/tvPersentage"
                             app:layout_constraintEnd_toEndOf="@id/imgEclipse"
                             app:layout_constraintHorizontal_bias="0.506"
-                            app:layout_constraintStart_toStartOf="@id/imgEclipse"
-                            app:layout_constraintBottom_toBottomOf="@+id/tvPersentage"
-                            app:layout_constraintVertical_bias="0.097" />
+                            app:layout_constraintStart_toStartOf="@id/imgEclipse" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
