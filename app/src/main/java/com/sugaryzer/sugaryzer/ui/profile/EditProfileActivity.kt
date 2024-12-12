@@ -1,7 +1,10 @@
 package com.sugaryzer.sugaryzer.ui.profile
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
+import android.view.Window
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -55,9 +58,11 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun showMessageDialog() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setView(R.layout.loading)
-        val dialog: AlertDialog = builder.create()
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.loading)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         profileViewModel.editProfileResult.observe(this) {
                 response ->
