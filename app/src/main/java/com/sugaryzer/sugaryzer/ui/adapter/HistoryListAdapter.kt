@@ -1,6 +1,7 @@
 package com.sugaryzer.sugaryzer.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sugaryzer.sugaryzer.data.response.DataItemHistory
 import com.sugaryzer.sugaryzer.databinding.ItemHistoryBinding
+import com.sugaryzer.sugaryzer.ui.detailhistory.DetailHistoryActivity
+import com.sugaryzer.sugaryzer.ui.scan.ProductInformationActivity
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -31,6 +34,18 @@ class HistoryListAdapter(private val context: Context) :
             binding.tvProductName.text = history.product?.name ?: "Unknown Product"
             binding.tvDetailSugar.text = "${history.sugarConsume ?: 0} Gram"
             binding.tvTime.text = formatTime(history.createdAt ?: "")
+
+
+            binding.root.setOnClickListener{
+                val intent = Intent(context, DetailHistoryActivity::class.java).apply {
+                    putExtra(DetailHistoryActivity.EXTRA_PRODUCT_ID, history.productId)
+                    putExtra(DetailHistoryActivity.EXTRA_PRODUCT_CODE, history.product?.code)
+                    putExtra(DetailHistoryActivity.EXTRA_PRODUCT_NAME, history.product?.name)
+                    putExtra(DetailHistoryActivity.EXTRA_PRODUCT_SUGAR, history.sugarConsume)
+                    putExtra(DetailHistoryActivity.EXTRA_PRODUCT_DATE, history.createdAt)
+                }
+                context.startActivity(intent)
+            }
         }
 
         private fun formatTime(inputDate: String): String {
@@ -49,6 +64,7 @@ class HistoryListAdapter(private val context: Context) :
                 ""
             }
         }
+
     }
 
     companion object {
