@@ -116,68 +116,89 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvKandunganGula1" />
 
-        <Button
-            android:id="@+id/btnQuarter"
+        <LinearLayout
+            android:id="@+id/btnConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/btn_corner_radius"
-            android:text="1/4 Botol"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/line2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/btnHalf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/btn_corner_radius"
-            android:text="1/2 Botol"
-            app:layout_constraintTop_toBottomOf="@id/btnQuarter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <!-- First Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
 
-        <Button
-            android:id="@+id/btnThreeQuarter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/btn_corner_radius"
-            android:text="3/4 Botol"
-            app:layout_constraintTop_toBottomOf="@id/btnHalf"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <Button
+                    android:id="@+id/btnQuarter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/btn_activity_main"
+                    app:backgroundTint="@null"
+                    android:text="1/4 Botol"
+                    android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/btnFull"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/btn_corner_radius"
-            android:text="1 Botol"
-            app:layout_constraintTop_toBottomOf="@id/btnThreeQuarter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <Button
+                    android:id="@+id/btnHalf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_activity_main"
+                    app:backgroundTint="@null"
+                    android:text="1/2 Botol"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Second Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnThreeQuarter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/btn_activity_main"
+                    app:backgroundTint="@null"
+                    android:text="3/4 Botol"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btnFull"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_activity_main"
+                    app:backgroundTint="@null"
+                    android:text="1 Botol"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnTambahkanKeKonsumsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="40dp"
-            android:background="@drawable/btn_corner_radius"
+            android:background="@drawable/btn_action_main"
+            app:backgroundTint="@null"
             android:text="@string/add_consumption"
-            app:layout_constraintTop_toBottomOf="@id/btnFull"
+            app:layout_constraintTop_toBottomOf="@id/btnConfirm"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -187,8 +208,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/btn_corner_radius"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:background="@drawable/btn_action_second"
+            app:backgroundTint="@null"
             android:text="@string/back_to_camera"
             app:layout_constraintTop_toBottomOf="@id/btnTambahkanKeKonsumsi"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,7 +1,11 @@
 package com.sugaryzer.sugaryzer.ui.scan
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -44,28 +48,27 @@ class ProductInformationActivity : AppCompatActivity() {
 
         quarterButton.setOnClickListener {
             selectedButton = true
-            val selectedSugarAmount = 0.25 * productSugar
-            Toast.makeText(this, "Anda memilih 1/4 Botol", Toast.LENGTH_SHORT).show()
+            selectedSugarAmount = 0.25 * productSugar
+            Toast.makeText(this, "You select 1/4 Bottle", Toast.LENGTH_SHORT).show()
         }
 
         halfButton.setOnClickListener {
             selectedButton = true
             selectedSugarAmount = 0.5 * productSugar
-            Toast.makeText(this, "Anda memilih 1/2 Botol", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You select 1/2 Bottle", Toast.LENGTH_SHORT).show()
         }
 
         threeQuarterButton.setOnClickListener {
             selectedButton = true
             selectedSugarAmount = 0.75 * productSugar
-            Toast.makeText(this, "Anda memilih 3/4 Botol", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You select 3/4 Bottle", Toast.LENGTH_SHORT).show()
         }
 
         fullButton.setOnClickListener {
             selectedButton = true
             selectedSugarAmount = productSugar.toDouble()
-            Toast.makeText(this, "Anda memilih 1 Botol", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You select 1 Bottle", Toast.LENGTH_SHORT).show()
         }
-
 
         binding.btnBack.setOnClickListener{
             val intent = Intent(this, ScanActivity::class.java)
@@ -79,9 +82,11 @@ class ProductInformationActivity : AppCompatActivity() {
                 Toast.makeText(this, "Silakan pilih jumlah konsumsi terlebih dahulu", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.uploadScan(productCode?:"", selectedSugarAmount)
-                val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-                builder.setView(R.layout.loading)
-                val dialog: AlertDialog = builder.create()
+                val dialog = Dialog(this)
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.loading)
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 viewModel.scannedResult.observe(this){ response->
                     when (response) {
                         is ResultState.Loading -> dialog.show()
