@@ -2,12 +2,15 @@ package com.sugaryzer.sugaryzer.ui.signin
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.Dialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -105,9 +108,11 @@ class SignInActivity : AppCompatActivity() {
 
 
     private fun showMessageDialog() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setView(R.layout.loading)
-        val dialog: AlertDialog = builder.create()
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.loading)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         loginViewModel.responseResult.observe(this) {
                 response ->

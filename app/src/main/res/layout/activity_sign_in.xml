@@ -4,6 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_auth"
     tools:context=".ui.signin.SignInActivity">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/top_wave_login"
+        android:src="@drawable/top_wave"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="90dp"
         android:text="@string/sign_in"
         android:textColor="#000000"
         android:textSize="24sp"
@@ -38,7 +39,6 @@
         android:layout_marginHorizontal="32dp"
         app:startIconDrawable="@drawable/ic_email"
         app:layout_constraintTop_toBottomOf="@+id/signIn"
-        android:background="@drawable/background_oauth"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -46,6 +46,7 @@
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_oauth"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,7 +59,6 @@
         android:layout_marginTop="16dp"
         app:endIconMode="password_toggle"
         app:startIconDrawable="@drawable/ic_password"
-        android:background="@drawable/background_oauth"
         app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -67,10 +67,11 @@
             android:id="@+id/inputPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_oauth"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,8 +79,8 @@
         android:layout_marginTop="24dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/btn_corner_radius"
-        android:backgroundTint="#05C3DD"
+        android:background="@drawable/btn_activity_main"
+        app:backgroundTint="@null"
         android:text="@string/sign_in"
         android:textColor="@android:color/white"
         android:textSize="12sp"
@@ -87,38 +88,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_dont_have_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dont_have_account"
-        android:layout_marginTop="20dp"
-        android:textSize="12sp"
-        android:textColor="#CBD4D8"
-        android:fontFamily="@font/inter_medium"
-        app:layout_constraintTop_toBottomOf="@id/btnSignIn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signUp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/btn_activity_second"
         android:text="@string/sign_up"
-        android:textColor="#000000"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_dont_have_account"
+        android:textColor="@android:color/black"
+        app:backgroundTint="@null"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <ImageView
         android:id="@+id/bottomwave"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/bottom_wave_login"
+        android:src="@drawable/bottom_wave"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

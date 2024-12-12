@@ -2,6 +2,7 @@ package com.sugaryzer.sugaryzer.ui.signin
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.sugaryzer.sugaryzer.data.ResultState
 import com.sugaryzer.sugaryzer.data.repository.SugaryzerRepository
