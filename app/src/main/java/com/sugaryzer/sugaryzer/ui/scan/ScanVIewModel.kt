@@ -7,13 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sugaryzer.sugaryzer.data.ResultState
 import com.sugaryzer.sugaryzer.data.repository.SugaryzerRepository
+import com.sugaryzer.sugaryzer.data.response.DataItemRecommendation
 import com.sugaryzer.sugaryzer.data.response.LoginResponse
+import com.sugaryzer.sugaryzer.data.response.ResultAnalytics
+import com.sugaryzer.sugaryzer.data.response.ResultConsume
+import com.sugaryzer.sugaryzer.data.response.ResultProfile
 import com.sugaryzer.sugaryzer.data.response.ScanResponse
 import com.sugaryzer.sugaryzer.data.response.ScannedResponse
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import org.json.JSONObject
 import retrofit2.HttpException
+import java.time.LocalDate
 
 class ScanViewModel(private val sugaryzerRepository: SugaryzerRepository): ViewModel() {
     private val _imageUri = MutableLiveData<Uri?>()
@@ -21,6 +26,8 @@ class ScanViewModel(private val sugaryzerRepository: SugaryzerRepository): ViewM
 
     private val _uploadResult = MutableLiveData<ResultState<ScanResponse>>()
     val uploadResult: LiveData<ResultState<ScanResponse>> = _uploadResult
+    private val currentDate: String
+        get() = LocalDate.now().toString()
 
 
     fun setImageUri(uri: Uri) {
@@ -49,6 +56,10 @@ class ScanViewModel(private val sugaryzerRepository: SugaryzerRepository): ViewM
     private val _scannedResult = MutableLiveData<ResultState<ScannedResponse>>()
     val scannedResult = _scannedResult
 
+    val getConsume: LiveData<ResultState<ResultConsume>> = sugaryzerRepository.getConsume(currentDate)
+    fun getRecommendation(productBarcode: String): LiveData<ResultState<List<DataItemRecommendation>>> {
+        return sugaryzerRepository.getRecommendation(productBarcode)
+    }
     fun uploadScan(code:String, sugarConsume:Double){
         viewModelScope.launch {
             try {
