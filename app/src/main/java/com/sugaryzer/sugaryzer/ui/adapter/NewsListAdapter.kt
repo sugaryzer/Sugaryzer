@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sugaryzer.sugaryzer.data.response.DataItemNews
 import com.sugaryzer.sugaryzer.databinding.ItemNewsBinding
+import com.sugaryzer.sugaryzer.ui.detailnews.DetailNewsActivity
 
 class NewsListAdapter (private val context: Context) : ListAdapter<DataItemNews, NewsListAdapter.MyViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(
@@ -33,14 +34,14 @@ class NewsListAdapter (private val context: Context) : ListAdapter<DataItemNews,
                 .load(news.image)
                 .into(binding.newsPhoto)
 
-//            binding.root.setOnClickListener {
-//                val intent = Intent(context, StoryDetailActivity::class.java).apply {
-//                    putExtra(StoryDetailActivity.EXTRA_EVENT_NAME, story.name)
-//                    putExtra(StoryDetailActivity.EXTRA_EVENT_DESCRIPTION, story.description)
-//                    putExtra(StoryDetailActivity.EXTRA_EVENT_PHOTO, story.photoUrl)
-//                }
-//                context.startActivity(intent)
-//            }
+            binding.root.setOnClickListener {
+                val intent = Intent(context, DetailNewsActivity::class.java).apply {
+                    putExtra(DetailNewsActivity.EXTRA_NEWS_NAME, news.title)
+                    putExtra(DetailNewsActivity.EXTRA_NEWS_DESCRIPTION, news.description)
+                    putExtra(DetailNewsActivity.EXTRA_NEWS_IMAGE, news.image)
+                }
+                context.startActivity(intent)
+            }
         }
     }
     companion object {

@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_page"
     tools:context=".ui.detailnews.DetailNewsActivity">
 
     <androidx.cardview.widget.CardView
@@ -25,6 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
+                style="@style/RoundedCornerShape"
                 tools:src="@tools:sample/backgrounds/scenic"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Judul berita"
+                android:maxLines="3"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"

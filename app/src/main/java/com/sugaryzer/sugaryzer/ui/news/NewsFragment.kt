@@ -1,11 +1,14 @@
 package com.sugaryzer.sugaryzer.ui.news
 
+import android.app.Dialog
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -41,9 +44,12 @@ class NewsFragment : Fragment() {
             adapter = newsAdapter
         }
 
-        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        builder.setView(R.layout.loading)
-        val dialog: AlertDialog = builder.create()
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.loading)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
         viewModel.getNews.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ResultState.Loading -> dialog.show()
