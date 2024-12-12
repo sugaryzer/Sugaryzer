@@ -2,25 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:layout_marginHorizontal="40dp"
-    >
+    android:background="@android:color/transparent"
+    android:padding="20dp">
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:indeterminate="true"
-        android:indeterminateTint="@color/main" />
+        android:indeterminateTint="@color/main_color" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="@string/please_wait"
-        android:fontFamily="@font/poppins_semibold"
-        />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="@string/please_wait"-->
+<!--        android:fontFamily="@font/poppins_semibold"-->
+<!--        />-->
 </LinearLayout>
