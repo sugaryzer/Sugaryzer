@@ -11,4 +11,13 @@
     <color name="grayBlueLight">#CBD4D8</color>
     <color name="button_blue">#0095FF</color>
     <color name="main">#F97B7B</color>
+    <color name="red">#FF0000</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="green">#00FF00</color>
+    <color name="gray">#808080</color>
+    <color name="main_color">#0E1B48</color>
+    <color name="border_main">#A2BCDA</color>
+    <color name="activity_main">#83A6CE</color>
+    <color name="bg_page">#F8F8F8</color>
+    <color name="bg_auth">#FFFFFF</color>
 </resources>
