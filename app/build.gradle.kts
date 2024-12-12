@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.sugaryzer.sugaryzer"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -35,6 +35,8 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
+        buildConfig = true
     }
 }
 
@@ -57,8 +59,8 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.camera2)
+    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
-    implementation("com.google.android.material:material:1.12.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
