@@ -16,6 +16,7 @@ import com.sugaryzer.sugaryzer.data.response.ResultProfile
 import com.sugaryzer.sugaryzer.data.response.ScanResponse
 import com.sugaryzer.sugaryzer.data.response.ScannedResponse
 import okhttp3.MultipartBody
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -67,7 +68,7 @@ interface ApiService {
     @GET("users/current/analysis")
     suspend fun getConsume(
         @Query("date") date: String
-    ) : ConsumeResponse
+    ) : Response<ConsumeResponse>
 
     @GET("users/current/analysis")
     suspend fun getAnalytics(

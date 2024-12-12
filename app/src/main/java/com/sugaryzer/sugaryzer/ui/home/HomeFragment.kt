@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
                                     "kuning" -> Triple(
                                         ContextCompat.getColor(requireContext(), R.color.yellow),
                                         "Yellow",
-                                        "Konsumsi gula harian normal. Tetap perhatikan pola makan untuk menjaga keseimbangan gula darah."
+                                        "Konsumsi gula harian normal. Tetap perhatikan konsumsi gula untuk menjaga keseimbangan gula darah."
                                     )
                                     "hijau" -> Triple(
                                         ContextCompat.getColor(requireContext(), R.color.green),

@@ -17,6 +17,7 @@ import com.sugaryzer.sugaryzer.data.response.ResultConsume
 import com.sugaryzer.sugaryzer.data.response.ResultProfile
 import com.sugaryzer.sugaryzer.data.response.ScanResponse
 import com.sugaryzer.sugaryzer.data.response.ScannedResponse
+import com.sugaryzer.sugaryzer.data.response.UserProfileConsume
 import com.sugaryzer.sugaryzer.data.retrofit.ApiService
 import okhttp3.MultipartBody
 import retrofit2.HttpException
@@ -145,12 +146,45 @@ class SugaryzerRepository private constructor(
         emit(ResultState.Loading)
 
         try {
-            val response = apiService.getConsume(date)
+            val profileResponse = apiService.getProfile()
 
-            if (!response.error) {
-                emit(ResultState.Success(response.result))
+            if (profileResponse.error == false) {
+                val userName = profileResponse.result?.name ?: " "
+
+                val response = apiService.getConsume(date)
+
+                if (response.isSuccessful) {
+                    val consumeResponse = response.body()
+                    if (consumeResponse?.error == false) {
+                        emit(ResultState.Success(consumeResponse.result))
+                    } else {
+                        if (consumeResponse?.message == "No analysis yet") {
+                            val defaultConsume = ResultConsume(
+                                date = date,
+                                totalConsume = 0,
+                                userId = "",
+                                userProfile = UserProfileConsume(name = userName)
+                            )
+                            emit(ResultState.Success(defaultConsume))
+                        } else {
+                            emit(ResultState.Error(consumeResponse?.message ?: "Unknown error"))
+                        }
+                    }
+                } else {
+                    if (response.code() == 404) {
+                        val defaultConsume = ResultConsume(
+                            date = date,
+                            totalConsume = 0,
+                            userId = "",
+                            userProfile = UserProfileConsume(name = userName)
+                        )
+                        emit(ResultState.Success(defaultConsume))
+                    } else {
+                        emit(ResultState.Error("Error: ${response.message()}"))
+                    }
+                }
             } else {
-                emit(ResultState.Error(response.message ?: "Unknown error from server"))
+                emit(ResultState.Error("Failed to fetch user profile"))
             }
         } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
