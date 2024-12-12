@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_page"
     tools:context=".ui.profile.ProfileFragment">
     <!-- Profile Section -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -165,9 +166,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="#FF6B6B"
             android:text="@string/logout"
-            android:textColor="#FFF"
+            android:textColor="@color/black"
+            android:background="@drawable/btn_activity_second"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
