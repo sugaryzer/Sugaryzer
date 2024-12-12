@@ -2,11 +2,16 @@ package com.sugaryzer.sugaryzer.data.retrofit
 
 import com.sugaryzer.sugaryzer.data.dataclass.ScannedData
 import com.sugaryzer.sugaryzer.data.dataclass.SignInRequest
+import com.sugaryzer.sugaryzer.data.dataclass.SignUpRequest
+import com.sugaryzer.sugaryzer.data.response.AnalyticsResponse
+import com.sugaryzer.sugaryzer.data.response.ConsumeResponse
 import com.sugaryzer.sugaryzer.data.response.HistoryResponse
 import com.sugaryzer.sugaryzer.data.response.LoginResponse
 import com.sugaryzer.sugaryzer.data.response.MessageResponse
 import com.sugaryzer.sugaryzer.data.response.NewsResponse
 import com.sugaryzer.sugaryzer.data.response.ProfileResponse
+import com.sugaryzer.sugaryzer.data.response.RecommendationResponse
+import com.sugaryzer.sugaryzer.data.response.RegisterResponse
 import com.sugaryzer.sugaryzer.data.response.ResultProfile
 import com.sugaryzer.sugaryzer.data.response.ScanResponse
 import com.sugaryzer.sugaryzer.data.response.ScannedResponse
@@ -19,20 +24,15 @@ import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface ApiService {
-    @FormUrlEncoded
     @POST("register")
     suspend fun register(
-        @Field("name") name: String,
-        @Field("email") email: String,
-        @Field("image") image: String,
-        @Field("height") height: Int,
-        @Field("weight") weight: Int,
-        @Field("age") age: Int,
-        @Field("password") password: String
-    ): MessageResponse
+        @Body SignUpRequest: SignUpRequest
+    ): RegisterResponse
 
     @POST("login")
     suspend fun login(
@@ -57,13 +57,25 @@ interface ApiService {
     ): ScanResponse
 
     @GET("users/current/scanned-products")
-    suspend fun getHistory(): HistoryResponse
+    suspend fun getHistory(@Query("size") size: Int): HistoryResponse
 
     @POST("users/current/scanned-products")
     suspend fun uploadScan(
         @Body scannedData: ScannedData
     ): ScannedResponse
 
-    @GET("users/current/scanned-products")
-    suspend fun historyScan(): HistoryResponse
+    @GET("users/current/analysis")
+    suspend fun getConsume(
+        @Query("date") date: String
+    ) : ConsumeResponse
+
+    @GET("users/current/analysis")
+    suspend fun getAnalytics(
+        @Query("daily_sugar_intake") sugar: Int
+    ) : AnalyticsResponse
+
+    @GET("products/{productBarcode}/recommendations")
+    suspend fun getRecommendations(
+        @Path("productBarcode") productBarcode: String
+    ): RecommendationResponse
 }

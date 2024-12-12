@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sugaryzer.sugaryzer.data.di.Injection
 import com.sugaryzer.sugaryzer.data.repository.SugaryzerRepository
 import com.sugaryzer.sugaryzer.ui.history.HistoryViewModel
+import com.sugaryzer.sugaryzer.ui.home.HomeViewModel
 import com.sugaryzer.sugaryzer.ui.main.MainViewModel
 import com.sugaryzer.sugaryzer.ui.news.NewsViewModel
 import com.sugaryzer.sugaryzer.ui.signin.SignInViewModel
@@ -39,6 +40,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

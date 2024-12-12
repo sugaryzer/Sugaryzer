@@ -5,10 +5,15 @@ import androidx.lifecycle.liveData
 import com.sugaryzer.sugaryzer.data.ResultState
 import com.sugaryzer.sugaryzer.data.dataclass.ScannedData
 import com.sugaryzer.sugaryzer.data.dataclass.SignInRequest
+import com.sugaryzer.sugaryzer.data.dataclass.SignUpRequest
 import com.sugaryzer.sugaryzer.data.pref.UserPreference
 import com.sugaryzer.sugaryzer.data.response.DataItemHistory
 import com.sugaryzer.sugaryzer.data.response.DataItemNews
+import com.sugaryzer.sugaryzer.data.response.DataItemRecommendation
 import com.sugaryzer.sugaryzer.data.response.LoginResponse
+import com.sugaryzer.sugaryzer.data.response.RegisterResponse
+import com.sugaryzer.sugaryzer.data.response.ResultAnalytics
+import com.sugaryzer.sugaryzer.data.response.ResultConsume
 import com.sugaryzer.sugaryzer.data.response.ResultProfile
 import com.sugaryzer.sugaryzer.data.response.ScanResponse
 import com.sugaryzer.sugaryzer.data.response.ScannedResponse
@@ -28,6 +33,11 @@ class SugaryzerRepository private constructor(
 
     suspend fun removeSession() = pref.removeSession()
 
+    suspend fun signUp(email: String,password: String,  name: String, weight: Int, height: Int, age: Int): RegisterResponse {
+        val signUpRequest = SignUpRequest(email, password, name, weight,height,age)
+        return apiService.register(signUpRequest)
+    }
+
     suspend fun login(email: String, password: String): LoginResponse {
         val signInRequest = SignInRequest(email, password)
         return apiService.login(signInRequest)
@@ -44,8 +54,6 @@ class SugaryzerRepository private constructor(
         }
     }
 
-    suspend fun register(name: String, email: String, image: String, height: Int, weight: Int, age: Int, password: String) = apiService.register(name, email, image, height, weight, age, password)
-
     suspend fun saveThemeSetting(isDarkModeActive: Boolean) = pref.saveThemeSetting(isDarkModeActive)
 
     fun getNews(): LiveData<ResultState<List<DataItemNews>>> = liveData {
@@ -53,6 +61,22 @@ class SugaryzerRepository private constructor(
 
         try {
             val response = apiService.getNews()
+
+            if (response.error == false) {
+                emit(ResultState.Success(response.result?.data ?: emptyList()))
+            } else {
+                emit(ResultState.Error(response.message ?: "Unknown error from server"))
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error(e.message.toString()))
+        }
+    }
+
+    fun getRecommendation(productBarcode: String): LiveData<ResultState<List<DataItemRecommendation>>> = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val response = apiService.getRecommendations(productBarcode)
 
             if (response.error == false) {
                 emit(ResultState.Success(response.result?.data ?: emptyList()))
@@ -86,7 +110,7 @@ class SugaryzerRepository private constructor(
         emit(ResultState.Loading)
 
         try {
-            val response = apiService.getHistory()
+            val response = apiService.getHistory(size = 100)
 
             if (response.error == false) {
                 emit(ResultState.Success(response.result?.data ?: emptyList()))
@@ -97,6 +121,7 @@ class SugaryzerRepository private constructor(
             emit(ResultState.Error(e.message.toString()))
         }
     }
+
 
     suspend fun scanImage(photo: MultipartBody.Part): ResultState<ScanResponse> {
         return try {
@@ -113,6 +138,37 @@ class SugaryzerRepository private constructor(
             ResultState.Error("HTTP error: ${e.message}")
         } catch (e: Exception) {
             ResultState.Error("An unexpected error occurred: ${e.message}")
+        }
+    }
+
+    fun getConsume(date: String): LiveData<ResultState<ResultConsume>> = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val response = apiService.getConsume(date)
+
+            if (!response.error) {
+                emit(ResultState.Success(response.result))
+            } else {
+                emit(ResultState.Error(response.message ?: "Unknown error from server"))
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error(e.message.toString()))
+        }
+    }
+
+
+    fun getAnalytics(sugar: Int): LiveData<ResultState<ResultAnalytics>> = liveData {
+        emit(ResultState.Loading)
+        try {
+            val response = apiService.getAnalytics(sugar)
+            if (response.error == false) {
+                emit(ResultState.Success(response.result))
+            } else {
+                emit(ResultState.Error(response.message ?: "Unknown error from server"))
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error(e.message.toString()))
         }
     }
 

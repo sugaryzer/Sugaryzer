@@ -3,17 +3,18 @@ package com.sugaryzer.sugaryzer.ui.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sugaryzer.sugaryzer.R
 import com.sugaryzer.sugaryzer.SectionsPagerAdapter
 import com.sugaryzer.sugaryzer.ViewModelFactory
 import com.sugaryzer.sugaryzer.data.di.Injection
 import com.sugaryzer.sugaryzer.ui.profile.ProfileViewModel
 import com.sugaryzer.sugaryzer.ui.signin.SignInActivity
+
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
@@ -28,14 +29,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         applyTheme()
         setContentView(R.layout.activity_main)
-
-        viewModel.getSession().observe(this) { token ->
-            if (token.isNullOrEmpty()){
-                val signInActivity = Intent(this, SignInActivity::class.java)
-                startActivity(signInActivity)
-                finish()
-            }
-        }
 
         viewPager = findViewById(R.id.viewPager)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
